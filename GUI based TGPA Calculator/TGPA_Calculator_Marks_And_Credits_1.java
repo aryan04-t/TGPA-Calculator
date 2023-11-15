@@ -1,0 +1,417 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.DecimalFormat;
+
+
+public class TGPA_Calculator_Marks_And_Credits_1 extends Layout implements KeyListener, MouseListener{  
+    
+    JPanel Text_Field_And_Heading_Holder;
+
+
+    // 1st Line
+    JTextField Text_Field_for_Marks_of_Subject1;
+    JTextField Text_Field_for_Credits_of_Subject1;
+    JLabel Sub1_Marks_Error_Text;
+    JLabel Sub1_Credits_Error_Text;
+
+
+    // Submit Button
+    JButton Submit;
+
+
+    // Submit Button's Activation Checking Variables
+
+    boolean m1_1, c1_1;
+
+    boolean m2_1, c2_1;
+
+
+    TGPA_Calculator_Marks_And_Credits_1(){
+
+        Text_Field_And_Heading_Holder = new JPanel();
+        this.add(Text_Field_And_Heading_Holder);
+
+        // Setting up background colour of Panel
+        
+        if(Apps_Color==1){
+            Text_Field_And_Heading_Holder.setBackground(new Color(255, 115, 0));
+        }
+        else if(Apps_Color==2){
+            Text_Field_And_Heading_Holder.setBackground(new Color(119, 41, 196));
+        }
+        else if(Apps_Color==3){
+            Text_Field_And_Heading_Holder.setBackground(new Color(0, 123, 255));
+        }
+        else if(Apps_Color==4){
+            Text_Field_And_Heading_Holder.setBackground(new Color(76, 204, 76));
+        }
+        else if(Apps_Color==5){
+            Text_Field_And_Heading_Holder.setBackground(new Color(255, 51, 51));
+        }
+        else if(Apps_Color==0){
+            Text_Field_And_Heading_Holder.setBackground(new Color(25, 25, 25));
+        }
+
+        Text_Field_And_Heading_Holder.setBorder(BorderFactory.createLineBorder(new Color(148, 0, 211), 2));           // This will create a border around our Label which will have a thickness of 2px 
+
+
+        // Creating a Label to display text and adding it to our Panel 
+
+        JLabel Heading_label = new JLabel();                                           // Creates a Label 
+        Heading_label.setText("<html> <center> <br> <br> <br> * Enter Your Marks of Each Subject out of 100 <br> and Their Credits: <br> <br> <br> <br> Marks    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     Credits </center> </html>");              // Sets the Text which has to be displayed Inside the Label 
+        
+        // above "&nbsp" inside "<html>" tag means "Non Breaking Space" it is used to add Horizontal Space between the words 
+
+
+        Heading_label.setForeground(new Color(255, 255, 255));                    // Sets Color of Text 
+
+        Heading_label.setHorizontalAlignment(JLabel.CENTER);                            // Sets Horizontal Alignment of Label in Panel  
+
+        Heading_label.setPreferredSize(new Dimension(360, 240));           // Setting Size of Label 
+
+        Text_Field_And_Heading_Holder.add(Heading_label);                                                   // Adding Label to the Panel 
+
+
+        // Increasing Font Size of Text inside the Label
+
+        Font font = Heading_label.getFont();                                          // get the current font
+        int font_Size = font.getSize() + 1;                                         // increase the font size by 10
+        Font new_Font = new Font(font.getName(), font.getStyle(), font_Size);        // create a new font with the increased size
+        Heading_label.setFont(new_Font);                                              // set the label's font to the new font 
+
+
+        // Setting up Text_Field_And_Heading_Holder Panel's Layout Manager as FlowLayout which will have "10px" horizontal & "5px" vertical gap between the TextFields 
+
+        Text_Field_And_Heading_Holder.setLayout(new FlowLayout(FlowLayout.CENTER, 12, 5));   
+
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        
+        // Below we are Customizing Panels for user's each response for "No. of Subjects", and only that "Customized Panel" will be shown to the user for which he/she has opted by giving input for "No. of Subjects" in the last frame  
+        
+        // These "Customized Panels" which we will be working on below will have JTextFields which will take Input from user for "Marks & Credits of Each Subject" 
+
+        // For How many "Subjects" we have to take input from user for "Marks and Credits" was decided in the last frame which was the frame created by the file "TGPA_Calculator_No_Of_Subjects.java"
+        
+        // When user clicked on any numbered button out of the number buttons which were displayed infront of him/her in the last frame, "Integer Varibale a's" value was updated to the "No. of Subjects" for which user wanted to calculate it's TGPA for and after that this file's constructor was called to switch to the next frame of our application for "TGPA Calculation" 
+        
+        // And in this next Frame, As per that Updated value of "Variable a" the user will be shown a Frame which will have a Panel that will have exactly the same amount of JTextFields which are needed for taking input from user for "Marks and Credits" of all the n number of subjects for which he/she wants to Calculate his/her TGPA for.  
+
+        
+        if(a == 1){    
+
+            // 1st Line 
+
+            // Creating 1st Text Field for Marks of 1st Subject 
+            Text_Field_for_Marks_of_Subject1 = new JTextField();
+            Text_Field_for_Marks_of_Subject1.setBackground(new Color(0, 0, 0)); 
+            Text_Field_for_Marks_of_Subject1.setForeground(new Color(255, 255, 255));
+            Text_Field_for_Marks_of_Subject1.setPreferredSize(new Dimension(158, 20)); 
+            Text_Field_for_Marks_of_Subject1.setText("Enter Marks of 1st Subject");
+            Text_Field_for_Marks_of_Subject1.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+            Text_Field_for_Marks_of_Subject1.addKeyListener(this);
+            Text_Field_And_Heading_Holder.add(Text_Field_for_Marks_of_Subject1);
+
+            // Creating 2nd Text Field for Credits of 1st Subject 
+            Text_Field_for_Credits_of_Subject1 = new JTextField();
+            Text_Field_for_Credits_of_Subject1.setBackground(new Color(0, 0, 0)); 
+            Text_Field_for_Credits_of_Subject1.setForeground(new Color(255, 255, 255));
+            Text_Field_for_Credits_of_Subject1.setPreferredSize(new Dimension(158, 20)); 
+            Text_Field_for_Credits_of_Subject1.setText("Enter Credits of 1st Subject");
+            Text_Field_for_Credits_of_Subject1.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+            Text_Field_for_Credits_of_Subject1.addKeyListener(this);
+            Text_Field_And_Heading_Holder.add(Text_Field_for_Credits_of_Subject1);
+
+
+            // Label for Displaying Error of 1st Subject's Marks
+            Sub1_Marks_Error_Text = new JLabel(); 
+            Sub1_Marks_Error_Text.setPreferredSize(new Dimension(158, 10));
+
+            if(Apps_Color==3 || Apps_Color==4 || Apps_Color==0){
+                Sub1_Marks_Error_Text.setForeground(new Color(255, 0, 0)); 
+            }
+            else if(Apps_Color==1 || Apps_Color==2 || Apps_Color==5){
+                Sub1_Marks_Error_Text.setForeground(new Color(255, 255, 255)); 
+            }
+
+            Sub1_Marks_Error_Text.setFont(new Font("Segoe UI", Font.PLAIN, 8));
+            Text_Field_And_Heading_Holder.add(Sub1_Marks_Error_Text);
+
+
+            // Label for Displaying Error of 1st Subject's Credits
+            Sub1_Credits_Error_Text = new JLabel(); 
+            Sub1_Credits_Error_Text.setPreferredSize(new Dimension(158, 10));
+
+            if(Apps_Color==3 || Apps_Color==4 || Apps_Color==0){
+                Sub1_Credits_Error_Text.setForeground(new Color(255, 0, 0)); 
+            }
+            else if(Apps_Color==1 || Apps_Color==2 || Apps_Color==5){
+                Sub1_Credits_Error_Text.setForeground(new Color(255, 255, 255)); 
+            }
+
+            Sub1_Credits_Error_Text.setFont(new Font("Segoe UI", Font.PLAIN, 8));
+            Text_Field_And_Heading_Holder.add(Sub1_Credits_Error_Text);
+            
+
+
+            
+            // Last Line, "The Submit Button"
+
+            Submit = new JButton("Submit");
+            Submit.setFocusable(false);
+            Submit.setBackground(new Color(25, 25,25));
+            Submit.setForeground(new Color(0, 0, 0));
+            Submit.setEnabled(false);
+            Submit.addActionListener(this);
+            Text_Field_And_Heading_Holder.add(Submit);
+
+        }
+
+        // Adding Mouse Listener to Panel so that when "slidingPanel" is visible, we will use "MouseEvent" Class to make the "slidingPanel" invisible when the user will click somewhere else other than slidingPanel on the frame 
+
+        Text_Field_And_Heading_Holder.addMouseListener(this);
+    }
+
+
+
+    // Abstract Methods of KeyListener Interface 
+
+    public void keyPressed(KeyEvent e) {  // Here we are restricting user to only type numeric values in TextField 
+
+        // 1st Subject's Marks 
+        if(e.getSource()==Text_Field_for_Marks_of_Subject1){
+            char c = e.getKeyChar();
+            if (c >= '0' && c <= '9' || c == KeyEvent.VK_BACK_SPACE) {
+                Text_Field_for_Marks_of_Subject1.setEditable(true);
+                Sub1_Marks_Error_Text.setText("");
+                
+                m1_1 =true;
+
+                if(m1_1 && c1_1 && m2_1 && c2_1){
+                    Submit.setEnabled(true);
+                    Submit.setBackground(new Color(0, 255,0));
+                }
+            }
+            else {
+                Text_Field_for_Marks_of_Subject1.setText("");
+                Sub1_Marks_Error_Text.setText("* Enter only whole no.s between 0-100");
+                
+                m1_1 = false;
+                Submit.setBackground(new Color(25, 25,25));
+                Submit.setEnabled(false);
+            }
+        }  
+
+        // 1st Subject's Credits
+        if(e.getSource()==Text_Field_for_Credits_of_Subject1){
+            char c = e.getKeyChar();
+            if (c >= '1' && c <= '5' || c == KeyEvent.VK_BACK_SPACE) {
+                Text_Field_for_Credits_of_Subject1.setEditable(true);
+                Sub1_Credits_Error_Text.setText("");
+
+                c1_1= true;
+
+                if(m1_1 && c1_1 && m2_1 && c2_1){
+                    Submit.setEnabled(true);
+                    Submit.setBackground(new Color(0, 255,0));
+                }
+            }
+            else {
+                Text_Field_for_Credits_of_Subject1.setText("");
+                Sub1_Credits_Error_Text.setText("* Enter only whole no.s between 1-5");
+
+                c1_1 = false;
+                Submit.setBackground(new Color(25, 25,25));
+                Submit.setEnabled(false);
+            }
+        }  
+
+    }
+
+
+    public void keyReleased(KeyEvent e) {  // Here we are restricting user to just enter number in range 1-100 for marks and 1-5 for credits
+
+        // 1st Subject's Marks
+        if(e.getSource()==Text_Field_for_Marks_of_Subject1){
+            String value = Text_Field_for_Marks_of_Subject1.getText();
+            try {
+                int number = Integer.parseInt(value);
+                if (number < 0 || number > 100) {
+                    Sub1_Marks_Error_Text.setText("* Enter only whole no.s between 0-100");
+                    Text_Field_for_Marks_of_Subject1.setText("");
+
+                    m2_1 = false;
+                    Submit.setBackground(new Color(25, 25,25));
+                    Submit.setEnabled(false);
+                }
+                else{
+                    m2_1 = true;
+
+                    if(m1_1 && c1_1 && m2_1 && c2_1){
+                        Submit.setEnabled(true);
+                        Submit.setBackground(new Color(0, 255,0));
+                    }
+                }
+            } 
+            catch (NumberFormatException ex) {
+                Text_Field_for_Marks_of_Subject1.setText("");
+                Sub1_Marks_Error_Text.setText("* Enter only whole no.s between 0-100");
+
+                m2_1 = false;
+                Submit.setBackground(new Color(25, 25,25));
+                Submit.setEnabled(false);
+            }
+        }   
+
+        // 1st Subject's Credits
+        if(e.getSource()==Text_Field_for_Credits_of_Subject1){
+            String value = Text_Field_for_Credits_of_Subject1.getText();
+            try {
+                int number = Integer.parseInt(value);
+                if (number < 1 || number > 5) {
+                    Sub1_Credits_Error_Text.setText("* Enter only whole no.s between 1-5");
+                    Text_Field_for_Credits_of_Subject1.setText("");
+
+                    c2_1 = false;
+                    Submit.setBackground(new Color(25, 25,25));
+                    Submit.setEnabled(false);
+                }
+                else{
+                    c2_1 = true;
+
+                    if(m1_1 && c1_1 && m2_1 && c2_1){
+                        Submit.setEnabled(true);
+                        Submit.setBackground(new Color(0, 255,0));
+                    }
+                }
+            } 
+            catch (NumberFormatException ex) {
+                Text_Field_for_Credits_of_Subject1.setText("");
+                Sub1_Credits_Error_Text.setText("* Enter only whole no.s between 1-5");
+
+                c2_1 = false;
+                Submit.setBackground(new Color(25, 25,25));
+                Submit.setEnabled(false);
+            }
+        }  
+
+    }
+
+
+    // We are not using this below method but we have to define it here in the class because we have implemented the "MouseListener" interface and when we implement any interface until we don't define all the abstract methods it will give an erorr and the only way that we can skip defining abstract methods of an implemented interface is by declaring the class also as abstract. 
+
+    // But when we're not defining abstract methods and we're declaring class as abstract then that case will not work here as per our project's point of view, because we cannot make objects of abstract classes and if we cannot make objects of our class, we won't be able to call it's constructor and this will not be suitable for our applications funtionality. 
+
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+
+
+    // Defining what to do when user clicks on the frame anywhere else than slidingPanel
+
+    public void mouseClicked(MouseEvent e) {
+        if (Text_Field_And_Heading_Holder.getBounds().contains(e.getPoint())) {
+            // When click occurred inside the sliding panel, do nothing.
+        } 
+        else {
+            // When click occurred outside the sliding panel, make the sliding panel invisible it.
+            slidingPanel.setVisible(false);
+        }
+    }
+
+    // These are also the abstract methods present in the MouseListener interface which should be defined when MouseListner is implemented in a class, but we don't wanna use these features so we will leave them empty 
+
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    public void mouseExited(MouseEvent e) {
+
+    }   
+
+
+    // Defining Functionality of Submit Button 
+
+    public void actionPerformed(ActionEvent e){
+
+        // This "actionPerformed" method will be overriding the Parent class Layout's "actionPerformed" method and because of this our "Navigaiton Hamburger Button" will become non-functional, therefore we will add those buttons functionalities here also in this Class's "actionPerformed" method so that our "Navigation Hamburger Button" can again become functional 
+
+
+        if(e.getSource()==Submit){
+            if(a == 1){
+                double m1 = Double.parseDouble(Text_Field_for_Marks_of_Subject1.getText());
+                double c1 = Double.parseDouble(Text_Field_for_Credits_of_Subject1.getText());
+    
+                double credit_sum = (c1);
+    
+                double s1_TGPA = Math.floor(m1 / 9);
+    
+    
+                double multiple_sum = ((s1_TGPA*c1));
+    
+                TGPA = (multiple_sum/credit_sum);
+                DecimalFormat df = new DecimalFormat(".00");
+                TGPA = Double.parseDouble(df.format(TGPA));
+                if(TGPA>=10){
+                    TGPA = 10;
+                }
+                
+                this.setVisible(false);
+                this.dispose();
+                new TGPA_Calculator_Display_TGPA();
+            }
+        }
+
+        
+        // Hamburger Navigation Button Functionality
+        if(e.getSource() == nav_button){
+            toggleSlidingPanel();
+        }
+
+        // Home Button Functionality
+        if(e.getSource() == Home_Button){
+            this.setVisible(false);
+            this.dispose();
+            new Home();
+        }
+
+        // Help Button Functionality
+        if(e.getSource() == Help_Button){
+            this.setVisible(false);
+            this.dispose();
+            new Help();
+        }
+
+        // TGPA Button Functionality
+        if(e.getSource() == TGPA_Button){
+            this.setVisible(false);
+            this.dispose();
+            new TGPA_Calculator_No_Of_Subjects();
+        }
+
+        // Disclaimer Button Functionality
+        if(e.getSource() == Disclaimer_Button){
+            this.setVisible(false);
+            this.dispose();
+            new Disclaimer();
+        }
+
+        // Change Apps Color Button Button Functionality
+        if(e.getSource() == Change_Apps_Color_Button){
+            this.setVisible(false);
+            this.dispose();
+            new Change_Apps_Color();
+        }
+    }
+}
