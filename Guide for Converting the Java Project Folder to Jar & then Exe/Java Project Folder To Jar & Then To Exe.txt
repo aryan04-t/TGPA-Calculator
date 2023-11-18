@@ -1,0 +1,134 @@
+# Converting your Java Project Folder to Jar:
+
+
+@ Open your Java Project Folder Normally in Your Windows Operating System by Double Clicking on it, make sure it has all the .class Files of your Project 
+
+@ Now make a "MANIFEST.MF" File in your Project Folder's directory and Type this text inside "MANIFEST.MF" file and save it.
+
+* Text which has to be typed in "MANIFEST.MF":
+
+Main-Class: Main
+Preview-Features: true
+
+
+---> In the above Text mention your Project's "Main" class's name in Front of "Main-Class:", "Main" class will be the class which is made by that .java file after compliation which has the "public static void main()" method in it. 
+
+
+---> & in 2nd Line of Text in "MANIFEST.MF" File we're setting "Preview-Features: true" to avoid "Error: LinkageError occurred while loading main class Main java.lang.UnsupportedClassVersionError: Preview features are not enabled for Main (class file version 63.65535). Try running with '--enable-preview' " 
+
+
+---> Due to this above error you cannot run your Jar File on Double Clicking and even if you run your Jar file in terminal using command "java -jar My_Project.jar" then also it doesn't runs and gives you the above error and to run your file you have to then run it using command "java --enable-preview -jar My_Project.jar" and then only it will run smoothly, but what's the point if you cannot run your Jar file by double clicking on it and you have to do so many efforts by opening terminal. 
+
+
+
+
+@ Now After Making Your MANIFEST.MF File, Open Powershell in Your Java Project's Folder and type Command: 
+ 
+---> "jar cfm Your_New_Jar_File's_Name_with_Extension.jar MANIFEST.MF *.class"
+
+or
+
+---> "jar cvfm Your_New_Jar_File's_Name_with_Extension.jar MANIFEST.MF *.class"
+
+
+Ex: To make my current projects Jar File I have to give this command in the powershell, "jar cvfm TGPA_Calculator.jar MANIFEST.MF *.class Images/*".
+
+---> Above command means "Create a Jar file named TGPA_Calculator.jar and include MANIFEST.MF in it and also include all the .class files present in this directory and there is a folder called Images in this directory, include all the images present in that directory also" 
+
+---> and Your Jar will be successfully created after successful execution of this command and the Jar file will be present in the same directory where you have opened your Powershell. 
+
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+
+Q1. what does cfm means here in "jar cfm MyProgram.jar MANIFEST.MF *.class" command?
+
+---> In the jar command, the options -c, -f, and -m are used to specify the operation to perform, the name of the output Jar file, and the location of the manifest file, respectively.
+
+Here's what each option means:
+
+-c: Creates a new Jar file
+-f: Specifies the name of the output Jar file
+-m: Specifies the location of the manifest file
+So, in the command jar cfm MyProgram.jar MANIFEST.MF *.class,
+
+c indicates that we want to create a new Jar file.
+f MyProgram.jar specifies that the output file should be named MyProgram.jar.
+m MANIFEST.MF specifies the location of the manifest file. Here, MANIFEST.MF is located in the same directory as the .class files.
+*.class indicates that we want to include all .class files in the current directory in the Jar file.
+Therefore, the jar command with the cfm options creates a new Jar file, specifies its name and location of the manifest file, and includes all .class files in the current directory in the Jar file.
+
+
+
+Q2. What does cvfm means then??
+
+---> cvfm is another variation of the jar command options. It is similar to cfm, but with an additional option -v, which stands for "verbose".
+
+Here's what each option means in the cvfm variation:
+
+-c: Creates a new Jar file
+-v: Displays detailed output of the Jar creation process
+-f: Specifies the name of the output Jar file
+-m: Specifies the location of the manifest file
+So, the command jar cvfm MyProgram.jar MANIFEST.MF *.class creates a new Jar file, specifies its name and location of the manifest file, includes all .class files in the current directory in the Jar file, and displays detailed output during the Jar creation process.
+
+In general, the -v option is optional and is used to display more information about the Jar creation process. If you want to see more detailed output during the creation of the Jar file, you can use the cvfm option.
+
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+
+
+# Converting Jar to Exe: 
+
+@ First of all if we can run our Jar file now on double clicking then why we have to convert it into an Exe, the point is that you cannot customize the icon of a Jar file, it will be always a cup of coffee, the symbol of Java Language and it kind off feels irritating that your desktop application doesn't have any icon because a right Icon can give life to your application, it will make it look attractive on Desktop. So, just convert your Jar file into an Exe and you can keep any icon which you want to keep of this Exe File.
+
+---> To convert your Jar into Exe we will be using a third party Software called Launch4j, just google this software or use this link "https://sourceforge.net/projects/launch4j/" and dowload it 
+
+---> After downloading install this software in your PC 
+
+---> And after successfull installation of this software just simply run it, you will not get any Desktop Shortcut for this software so just press windows button and search "Launch4j" and run the application 
+
+---> Now after running the application a window will pop up in front of you, it can feel overwhelming to see that window as it has a lot of fields to fill but not all of them are required to be filled for creating a basic Exe, if you want to explore all of those field you can do it on your own but I will tell you the basic fields which should be filled to create a normal basic Exe which will look dope.
+
+(i) 1st of all you will be in the "Basic" section only By Default but if you're not then in the navigation bar 1st option is "Basic" section, click on it and enter that interface
+
+(ii) Now fill the 1st field which says "Output file:", here you have to click the "File manager" logo which is present in the end of this field and after clicking on that button you have to select the directory where you want you're Exe file should be created and now when you have selected that directory give the name to your File, fill the "File Name" field in which type the name which you want you're Exe to be named as and type this name with ".exe" extension & after that click "Save"
+
+(iii) Now come to the next field which we have to fill, which is the "Jar:" field, here you have to click on the "File Manager" logo again which will also be present in the end of this field and after clicking on it just navigate through your directories and find the folder where your Jar file exists and then select that Jar file and click on the "Save" button 
+
+(iv) Now don't have to check the checkbox which says "Don't wrap the jar, launch only" and come to the next field, skip that field also which says "Wrapper Manifest:", we don't have to fill anything there and now come to the next field which says "Icon:"
+
+(v) Here you have to choose a Icon which will be displayed on your application when you're Exe is created and just keep this one thing in mind that here which ever Image you want to keep as Icon it should be in ".ico" format, not in "png, jpg, jpeg or any other format".
+
+(vi) If you have any Image with "png, jpg, jpeg or any other format" which you want to keep as your Exe's Icon then just go to google and search for "Free any image format to ico format converter" and try 2-3 websites to find the best website for conversion to ".ico format" because many websites after converting your file to ".ico format" downgrade the quality of image, I personally use "https://convertio.co/png-ico/" this website to convert my other format image files to ".ico format", this website which I have mentioned doesn't degrades the quality of the image after conversion that much & it's pretty fine.
+
+(vii) Now when you have a Image with ".ico format" in your PC which you want to use as your Exe's icon, then select that file in "Icon:" Field by clicking on the "File Manager" logo which will be present in the end of this field and click on the "Save" Button after selecting 
+
+(viii) Now we don't have to fill any other field in this section, ignore all the other fields and see the "Navigation Bar", there will be a section called "JRE", go in that section and there is this 1st field which is named as "JRE paths:" just paste the "File path of your JRE or JDK" in this field, open "C Drive" or whichever drive you have your "JDK" or "JRE" installed and locate them in your directories and after that just copy the path and paste it here in this field
+
+(viii) That's it, we don't have to fill any other fields now in this whole application and our work of converting Jar to Exe is almost done, just 1 or 2 more simple steps are left.
+
+(ix) Now click on "Settings Button" which is present in the top left corner on 4th position in the horizontal line, after clicking on that button it will ask you to give name to a ".xml" file, you can name this file anything, it will be created with your Exe file in that same location where you wanted your Exe file to be created and it has no purpose so you can delete it after your Exe is created, so give it any name and click the "Save" button.
+
+(x) Hurray!!! It's done, your Exe with Custom Icon is created, and just like Jar File you can run this Exe also on Double Click. 
+
+
+
+
+@ P.S.: 
+
+(a) Jar Stands for Java ARchive, it's a file format based on the popular ZIP file format and is used for aggregating many files into one. Although JAR can be used as a general archiving tool, the primary motivation for its development was so that Java applets and their requisite components (.class files, images and sounds) can be downloaded to a browser in a single HTTP transaction, rather than opening a new connection for each piece. 
+
+(b) Exe File means Executable file, it's a computer file that contains an encoded sequence of instructions that the system can execute directly when the user clicks the file icon.
+
+
+
+
+*** THANKS A LOT FOR READING MY GUIDE BOOK AND I HOPE IT HELPED ;) ***
+
+
+
+
+
+
